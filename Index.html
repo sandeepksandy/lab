@@ -1,1 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Gaming Service</title>
+    
+    <style>
+        /* Base Variables & Reset */
+        :root {
+            --bg-dark: #0f1016;
+            --bg-surface: #1a1b26;
+            --accent-primary: #7aa2f7;
+            --accent-glow: rgba(122, 162, 247, 0.4);
+            --text-main: #c0caf5;
+            --text-muted: #565f89;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(15, 16, 22, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background var(--transition-speed) ease;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Smooth Underline Transition on Hover */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-primary);
+            transition: width var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 0.6rem 1.2rem;
+            background-color: transparent;
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            background-color: var(--accent-primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            background-color: var(--accent-primary);
+            color: var(--bg-dark);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .btn-large:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1a1b26 0%, #0f1016 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent-primary);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Featured Games Grid */
+        .featured-section {
+            padding: 5rem 5%;
+        }
+
+        .featured-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background-color: var(--bg-surface);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+
+        /* Smooth Card Hover Transitions */
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-image {
+            height: 200px;
+            background-color: #2a2b36; /* Placeholder for actual images */
+        }
+
+        /* Setting placeholder gradient backgrounds to make it look nice out of the box */
+        .bg-1 { background: linear-gradient(45deg, #ff007a, #7aa2f7); }
+        .bg-2 { background: linear-gradient(45deg, #00f2fe, #4facfe); }
+        .bg-3 { background: linear-gradient(45deg, #43e97b, #38f9d7); }
+
+        .card-info {
+            padding: 1.5rem;
+        }
+
+        .card-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .card-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">NEXUS<span>PLAY</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#games">Library</a></li>
+            <li><a href="#community">Community</a></li>
+            <li><a href="#support">Support</a></li>
+        </ul>
+        <button class="btn-primary">Sign In</button>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>Level Up Your <span>Experience</span></h1>
+            <p>Stream top-tier games, connect with players worldwide, and experience zero-latency competitive play.</p>
+            <button class="btn-large">Start Playing Now</button>
+        </div>
+    </header>
+
+    <section id="games" class="featured-section">
+        <h2>Trending Now</h2>
+        <div class="card-grid">
+            <div class="game-card">
+                <div class="card-image bg-1"></div>
+                <div class="card-info">
+                    <h3>Cyber Core</h3>
+                    <p>Action RPG</p>
+                    <button class="btn-secondary">Play Now</button>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="card-image bg-2"></div>
+                <div class="card-info">
+                    <h3>Starfighter Arena</h3>
+                    <p>Multiplayer Shooter</p>
+                    <button class="btn-secondary">Play Now</button>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="card-image bg-3"></div>
+                <div class="card-info">
+                    <h3>Mythos Valley</h3>
+                    <p>Open World Survival</p>
+                    <button class="btn-secondary">Play Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add a smooth fade-in effect when elements scroll into view
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.game-card');
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            cards.forEach(card => {
+                // Initial state before scrolling into view
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
 
